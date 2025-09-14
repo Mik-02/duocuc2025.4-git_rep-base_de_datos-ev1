@@ -1,0 +1,26 @@
+# Cronograma
+
+Day 1: Fundación
+  M completa la Configuración del Entorno (Tarea 1).
+  B completa todas las Funciones de cálculo central (Tareas 1-4).
+  A diseña los casos de prueba y define los estándares de registro de errores.
+
+Day 2: Desarrollo Central
+  M construye el procedimiento de HABERES_MENSUALES (Tarea 3).
+  B completa el procedimiento de Detección de Solapamientos (Tarea 5).
+  A implementa el Trigger de Auditoría (Tarea 2) y comienza a agregar manejo de errores al código de B.
+
+Day 3: Integración y Pruebas
+  A lidera las pruebas, ejecutando todos los scripts y validando la calidad de los datos.
+  M integra todos los componentes y realiza pruebas de extremo a extremo.
+  B corrige cualquier error encontrado en la lógica de cálculo.
+
+Day 4: Implementación y Documentación
+  A finaliza la documentación técnica.
+  M crea el script maestro de implementación.
+
+Day 5: Creacion de Informe y Presentacion
+  Finalizar Informe.
+  Finalizar Presentacion.
+
+Todos los miembros del equipo realizan una revisión final y se preparan para la implementación en un entorno de staging.
