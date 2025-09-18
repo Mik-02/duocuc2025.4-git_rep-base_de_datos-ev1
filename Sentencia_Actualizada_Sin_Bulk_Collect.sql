@@ -1,7 +1,7 @@
 
 /**************************************************************************
   Archivo: A.sql
-  Descripción: Script único consolidado con salida DBMS_OUTPUT para logs.
+  Descripción: Script único  con salida DBMS_OUTPUT para logs.
   NOTA PRE-EJECUCIÓN:
     - En SQL*Plus / SQL Developer habilitar DBMS_OUTPUT:
         SET SERVEROUTPUT ON SIZE 1000000
@@ -10,17 +10,17 @@
 **************************************************************************/
 
 
--- *******************************************************************
--- PRECAUCIÓN: habilitar DBMS_OUTPUT en tu cliente antes de ejecutar tests:
+
+-- PRECAUCIÓN: habilitar DBMS_OUTPUT  antes de ejecutar tests:
 --    SET SERVEROUTPUT ON SIZE 1000000
 -- o ejecutar al inicio:
 --    BEGIN DBMS_OUTPUT.ENABLE(NULL); END;
--- *******************************************************************
 
 
--- *******************************************************************
--- 0) Crear tipo varray_mensajes (tipo SQL) si no existe
--- *******************************************************************
+
+
+-- 1) Crear tipo varray_mensajes (tipo SQL) si no existe
+
 DECLARE
   v_count INTEGER;
 BEGIN
@@ -33,9 +33,9 @@ BEGIN
   END IF;
 END;
 /
--- *******************************************************************
+
 -- 0.2) Crear secuencia seq_error si no existe
--- *******************************************************************
+
 DECLARE
   v_count2 INTEGER;
 BEGIN
@@ -48,9 +48,9 @@ BEGIN
   END IF;
 END;
 /
--- *******************************************************************
+
 -- 1) Procedimiento utilitario central para registrar errores (con DBMS_OUTPUT)
--- *******************************************************************
+
 CREATE OR REPLACE PROCEDURE SP_LOG_ERROR (
   p_subprograma IN VARCHAR2,
   p_gravedad    IN VARCHAR2,
@@ -79,9 +79,9 @@ EXCEPTION
     END;
 END;
 /
--- *******************************************************************
+
 -- 2) Funciones revisadas (mantener DBMS_OUTPUT vía SP_LOG_ERROR)
--- *******************************************************************
+
 
 -- F_GET_ANTIGUEDAD_ANIOS
 CREATE OR REPLACE FUNCTION F_GET_ANTIGUEDAD_ANIOS(p_numrut_emp NUMBER) RETURN NUMBER IS
@@ -195,9 +195,9 @@ EXCEPTION
         RETURN 'Error';
 END;
 /
--- *******************************************************************
+
 -- 3) Procedimientos revisados (con salida DBMS_OUTPUT donde corresponde)
--- *******************************************************************
+
 
 -- P_DETECTAR_SOLAPAMIENTOS
 CREATE OR REPLACE PROCEDURE P_DETECTAR_SOLAPAMIENTOS IS
@@ -375,9 +375,9 @@ EXCEPTION
         RAISE;
 END;
 /
--- *******************************************************************
+
 -- 4) Trigger de auditoría: TRG_AUDIT_ARRIENDO_AFTER_UPDATE (sin cambios funcionales)
--- *******************************************************************
+
 CREATE OR REPLACE TRIGGER TRG_AUDIT_ARRIENDO_AFTER_UPDATE
 AFTER UPDATE ON arriendo_propiedad
 FOR EACH ROW
@@ -409,9 +409,9 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('TRG_AUDIT_ARRIENDO_AFTER_UPDATE ERROR: ' || SQLERRM);
 END;
 /
--- *******************************************************************
--- 5) Scripts de prueba (usar en ambiente de pruebas)
--- *******************************************************************
+
+-- 5) Scripts de prueba 
+
 -- Antes de ejecutar las pruebas, asegúrate de habilitar DBMS_OUTPUT:
     SET SERVEROUTPUT ON SIZE 1000000
 --
@@ -459,6 +459,5 @@ COMMIT;
  /
  SELECT * FROM HABERES_MENSUALES WHERE mes = 7 AND anno = 2025;
 
--- *******************************************************************
+
 -- FIN DEL SCRIPT
--- *******************************************************************
